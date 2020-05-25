@@ -1,13 +1,13 @@
 {
   "name": "level-transactions-ts",
   "version": "0.1.0",
-  "description": "",
-  "keywords": [],
-  "author": {
-    "name": "Beeno Tung",
-    "email": "aabbcc1241@yahoo.com.hk",
-    "url": "https://beeno-tung.surge.sh"
-  },
+  "description": "Transaction layer for leveldb",
+  "keywords": [
+    "leveldb",
+    "transaction",
+    "typescript"
+  ],
+  "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
   "license": "BSD-2-Clause",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -49,5 +49,13 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-etc": "^1.10.1",
     "typescript": "^3.9.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/level-transactions-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/level-transactions-ts/issues"
+  },
+  "homepage": "https://github.com/beenotung/level-transactions-ts#readme"
 }
