@@ -5,6 +5,7 @@
   "keywords": [
     "leveldb",
     "transaction",
+    "ACID",
     "typescript"
   ],
   "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
