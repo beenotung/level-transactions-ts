@@ -12,21 +12,27 @@ export function test() {
   const key = 'foo'
 
   async function test(txn: LevelTransaction, i: number) {
-    return [
+    const res = [
       await txn.get(key).catch(() => null),
       txn.put(key, i),
       await txn.get(key).catch(() => null),
-      await txn.commit(),
     ]
+    await txn.commit()
+    console.log('res' + i, res)
+    if (res[1] !== res[2]) {
+      throw new Error('not consistent')
+    }
   }
 
-  test(tx1, 1)
-    .then(res => console.log('res1', res))
-    .catch(err => console.error('err1', err))
+  test(tx1, 1).catch(err => {
+    console.error('err1', err)
+    process.exit(1)
+  })
 
-  test(tx2, 2)
-    .then(res => console.log('res2', res))
-    .catch(err => console.error('err2', err))
+  test(tx2, 2).catch(err => {
+    console.error('err2', err)
+    process.exit(1)
+  })
 }
 
 test()
