@@ -1,12 +1,14 @@
 import fs from 'fs'
+import Level from 'level-ts'
 import { LevelTransaction } from '../src'
 
-const level = require('level')
+// const level = require('level')
 
 export function test() {
   // fs.rmdirSync('db', { recursive: true })
   fs.mkdirSync('db', { recursive: true })
-  const db = level('db')
+  // const db = level('db')
+  const db = new Level('db')
   const tx1 = new LevelTransaction(db)
   const tx2 = new LevelTransaction(db)
   const key = 'foo'

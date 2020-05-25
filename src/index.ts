@@ -11,14 +11,23 @@ export type TransactionOp<T = any> =
       value: T
     }
 
+export interface LevelInstance {
+  batch(ops: TransactionOp, cb: (err: any) => any): any
+}
+
 export class LevelTransaction<T = any> {
   pool = new Map<string, T | null>()
   ops: TransactionOp[] = []
 
-  db = new Level(this.db0)
-
   // tslint:disable-next-line ban-types
-  constructor(public db0: { batch: Function }) {}
+  constructor(public db: Level, public level: LevelInstance = (db as any).DB) {
+    if (!level) {
+      throw new Error('missing level instance')
+    }
+    if (typeof level.batch !== 'function') {
+      throw new TypeError('missing .batch in level instance')
+    }
+  }
 
   del(key: string) {
     this.ops.push({ type: 'del', key })
@@ -61,7 +70,7 @@ export class LevelTransaction<T = any> {
 
   commit(): Promise<T[]> {
     return new Promise((resolve, reject) => {
-      this.db0.batch(this.ops, (err: any) => {
+      ; (this.db as any).DB.batch(this.ops, (err: any) => {
         if (err) {
           reject(err)
         } else {
