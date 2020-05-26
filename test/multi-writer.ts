@@ -14,7 +14,9 @@ async function main() {
   await t1.commit()
 
   let A = await db.get('A')
-  if (!A) { throw new Error('db not init') }
+  if (!A) {
+    throw new Error('db not init')
+  }
   console.log('Initial A:', A)
 
   const t2 = new LevelTransaction(db)
